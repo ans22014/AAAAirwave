@@ -1,26 +1,55 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { Phone, ShieldCheck, Clock, Award } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
 
+const clips = [
+  { src: "/video/hero.webm", poster: "/images/hero-establishing.jpg" },
+  { src: "/video/hero-crane.webm", poster: "/images/hero-crane-poster.jpg" },
+  { src: "/video/hero-measuring.webm", poster: "/images/hero-measuring-poster.jpg" },
+];
+
 export default function Hero() {
+  const [active, setActive] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    const current = videoRefs.current[active];
+    if (!current) return;
+    current.currentTime = 0;
+    current.play().catch(() => {});
+  }, [active]);
+
+  const handleEnded = () => {
+    setActive((prev) => (prev + 1) % clips.length);
+  };
+
   return (
     <section
       className="relative min-h-screen flex items-end overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/hero-establishing.jpg')" }}
+      style={{ backgroundImage: `url('${clips[0].poster}')` }}
     >
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/hero-establishing.jpg"
-        data-hero-video
-      >
-        <source src="/video/hero.webm" type="video/webm" />
-      </video>
+      {clips.map((clip, i) => (
+        <video
+          key={clip.src}
+          ref={(el) => {
+            videoRefs.current[i] = el;
+          }}
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+          style={{ opacity: i === active ? 1 : 0 }}
+          autoPlay={i === active}
+          muted
+          playsInline
+          preload={i === active ? "auto" : "none"}
+          poster={clip.poster}
+          onEnded={handleEnded}
+          data-hero-video
+        >
+          <source src={clip.src} type="video/webm" />
+        </video>
+      ))}
+
       <div
         className="absolute inset-0"
         style={{

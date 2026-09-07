@@ -23,6 +23,8 @@ export default function CTABand() {
           </a>
           <a
             href={BUSINESS.housecallProHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-ice px-9 py-5 rounded-md text-lg font-semibold flex items-center gap-3"
           >
             <CalendarCheck size={20} />

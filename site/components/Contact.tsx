@@ -26,7 +26,7 @@ export default function Contact() {
               </a>
             </ContactRow>
             <ContactRow icon={<MapPin size={20} />} label="Service Area">
-              <span className="text-white font-medium">{BUSINESS.city} &amp; surrounding areas</span>
+              <span className="text-white font-medium">{BUSINESS.serviceArea}</span>
             </ContactRow>
             <ContactRow icon={<Award size={20} />} label="License">
               <span className="text-white font-medium">{BUSINESS.license}</span>
@@ -49,7 +49,7 @@ export default function Contact() {
             works for you.
           </p>
           <a
-            href="https://www.housecallpro.com"
+            href={BUSINESS.housecallProHref}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-ember px-8 py-4 rounded-md text-base mx-auto"

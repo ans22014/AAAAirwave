@@ -7,9 +7,10 @@ export const BUSINESS = {
   email: "aaaairwaves2@gmail.com",
   emailHref: "mailto:aaaairwaves2@gmail.com",
   city: "Tampa, FL",
+  serviceArea: "Pasco, Pinellas, Hillsborough & Sarasota Counties",
   license: "CAC1816350",
   yearsExperience: "20+",
-  googleReviewHref:
-    "https://search.google.com/local/writereview?placeid=ChIJz0xygEfEwogRuz9uUCFxsg0",
-  housecallProHref: "#booking",
+  googleReviewHref: "https://g.page/r/CRFXr9GIsQa0EBM/review",
+  housecallProHref:
+    "https://book.housecallpro.com/book/AAA-AIRWAVES/97b797e7c6e94c33a5f6da33722725f3?v2=true",
 } as const;

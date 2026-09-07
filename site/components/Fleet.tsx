@@ -1,15 +1,11 @@
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 
-const areas = [
-  "Tampa",
-  "Brandon",
-  "Town 'N' Country",
-  "Carrollwood",
-  "Westchase",
-  "Riverview",
-  "Valrico",
-  "Land O' Lakes",
+const counties = [
+  { name: "Pasco County", cities: "Hudson, New Port Richey, Land O' Lakes" },
+  { name: "Pinellas County", cities: "Clearwater, St. Petersburg, Largo" },
+  { name: "Hillsborough County", cities: "Tampa, Brandon, Riverview" },
+  { name: "Sarasota County", cities: "Sarasota, Venice, North Port" },
 ];
 
 export default function Fleet() {
@@ -29,23 +25,24 @@ export default function Fleet() {
         <div className="order-1 lg:order-2">
           <span className="section-label">Service Area</span>
           <h2 className="font-[family-name:var(--font-oswald)] font-bold text-white text-4xl lg:text-5xl mt-3 mb-6">
-            A Fleet Ready to <span className="duo-text">Roll, Tampa-Wide.</span>
+            Four Counties, <span className="duo-text">Hudson to Sarasota.</span>
           </h2>
           <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
-            Our branded vans and trucks are stocked and staged across the Tampa Bay area, so when
-            you call, help is already close by.
+            Our branded vans and trucks are stocked and staged across the Gulf Coast corridor, so
+            when you call, help is already close by.
           </p>
 
-          <div className="flex flex-wrap gap-3">
-            {areas.map((area) => (
-              <span
-                key={area}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium glass-card"
-                style={{ color: "var(--off-white)" }}
-              >
-                <MapPin size={14} className="ice-text" />
-                {area}
-              </span>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {counties.map((county) => (
+              <div key={county.name} className="glass-card rounded-xl p-4 flex gap-3">
+                <MapPin size={18} className="ice-text shrink-0 mt-0.5" />
+                <div>
+                  <div className="text-sm font-semibold text-white">{county.name}</div>
+                  <div className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
+                    {county.cities}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>

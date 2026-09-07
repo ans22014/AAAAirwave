@@ -138,6 +138,24 @@ h1, h2, h3, h4, .display {
 .animate-fadeup { animation: fadeUp 0.7s ease forwards; }
 .pulse-ice { animation: pulse-ring 2s ease-out infinite; }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.logo-marquee-track {
+  animation: marquee 32s linear infinite;
+}
+
+.logo-marquee-mask:hover .logo-marquee-track {
+  animation-play-state: paused;
+}
+
+.logo-marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -148,5 +166,18 @@ h1, h2, h3, h4, .display {
 
   [data-hero-video] {
     display: none;
+  }
+
+  .logo-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .logo-marquee-mask {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
