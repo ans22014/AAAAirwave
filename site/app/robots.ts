@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://aaaairwave.com/sitemap.xml",
+    sitemap: "https://aaa-airwaves.com/sitemap.xml",
   };
 }

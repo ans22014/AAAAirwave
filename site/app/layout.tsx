@@ -19,7 +19,7 @@ const description =
   "Family-owned HVAC company serving Tampa, FL for 20+ years. 24-hour emergency AC & heating repair, installation, and maintenance for homes and businesses. Licensed CAC1816350.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aaaairwave.com"),
+  metadataBase: new URL("https://aaa-airwaves.com"),
   title,
   description,
   keywords:
