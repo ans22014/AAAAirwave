@@ -14,12 +14,31 @@ const oswald = Oswald({
   weight: ["500", "600", "700"],
 });
 
+const title = "AAA Airwaves, Inc. | 24-Hour HVAC Repair & Installation in Tampa, FL";
+const description =
+  "Family-owned HVAC company serving Tampa, FL for 20+ years. 24-hour emergency AC & heating repair, installation, and maintenance for homes and businesses. Licensed CAC1816350.";
+
 export const metadata: Metadata = {
-  title: "AAA Airwaves, Inc. | 24-Hour HVAC Repair & Installation in Tampa, FL",
-  description:
-    "Family-owned HVAC company serving Tampa, FL for 20+ years. 24-hour emergency AC & heating repair, installation, and maintenance for homes and businesses. Licensed CAC1816350.",
+  metadataBase: new URL("https://aaaairwave.com"),
+  title,
+  description,
   keywords:
     "HVAC Tampa, AC repair Tampa, air conditioning installation, emergency AC repair, commercial HVAC Tampa, heating repair Tampa, AAA Airwaves",
+  openGraph: {
+    title,
+    description,
+    url: "/",
+    siteName: "AAA Airwaves, Inc.",
+    images: ["/images/hero-establishing.jpg"],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/images/hero-establishing.jpg"],
+  },
 };
 
 export default function RootLayout({
