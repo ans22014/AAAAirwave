@@ -25,7 +25,7 @@ export default function Fleet() {
         <div className="order-1 lg:order-2">
           <span className="section-label">Service Area</span>
           <h2 className="font-[family-name:var(--font-oswald)] font-bold text-white text-4xl lg:text-5xl mt-3 mb-6">
-            Four Counties, <span className="duo-text">Hudson to Sarasota.</span>
+            Proudly Serving <span className="duo-text">Four Florida Counties.</span>
           </h2>
           <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
             Our branded vans and trucks are stocked and staged across the Gulf Coast corridor, so
