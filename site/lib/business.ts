@@ -7,10 +7,19 @@ export const BUSINESS = {
   email: "aaaairwaves2@gmail.com",
   emailHref: "mailto:aaaairwaves2@gmail.com",
   city: "Tampa, FL",
+  streetAddress: "4819 N Cortez Ave",
+  addressLocality: "Tampa",
+  addressRegion: "FL",
+  postalCode: "33614",
   serviceArea: "Pasco, Pinellas, Hillsborough & Sarasota Counties",
+  serviceCounties: ["Pasco County", "Pinellas County", "Hillsborough County", "Sarasota County"],
   license: "CAC1816350",
   yearsExperience: "20+",
   googleReviewHref: "https://g.page/r/CRFXr9GIsQa0EBM/review",
+  aggregateRating: {
+    ratingValue: "4.4",
+    reviewCount: "32",
+  },
   housecallProHref:
     "https://book.housecallpro.com/book/AAA-AIRWAVES/97b797e7c6e94c33a5f6da33722725f3?v2=true",
 } as const;

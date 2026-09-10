@@ -10,6 +10,7 @@ const links = [
   { label: "Commercial Work", href: "#commercial" },
   { label: "Reviews", href: "#reviews" },
   { label: "Financing", href: "#financing" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 

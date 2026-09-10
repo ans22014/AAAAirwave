@@ -25,6 +25,11 @@ export default function Contact() {
                 {BUSINESS.email}
               </a>
             </ContactRow>
+            <ContactRow icon={<MapPin size={20} />} label="Address">
+              <span className="text-white font-medium">
+                {BUSINESS.streetAddress}, {BUSINESS.addressLocality}, {BUSINESS.addressRegion} {BUSINESS.postalCode}
+              </span>
+            </ContactRow>
             <ContactRow icon={<MapPin size={20} />} label="Service Area">
               <span className="text-white font-medium">{BUSINESS.serviceArea}</span>
             </ContactRow>

@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <div className="text-sm font-semibold text-white">{BUSINESS.name}</div>
             <div className="text-xs" style={{ color: "var(--text-muted)" }}>
-              License {BUSINESS.license} &middot; {BUSINESS.city}
+              License {BUSINESS.license} &middot; {BUSINESS.streetAddress}, {BUSINESS.city}
             </div>
           </div>
         </div>
