@@ -1,12 +1,7 @@
 import Image from "next/image";
-import { MapPin } from "lucide-react";
-
-const counties = [
-  { name: "Pasco County", cities: "Hudson, New Port Richey, Land O' Lakes" },
-  { name: "Pinellas County", cities: "Clearwater, St. Petersburg, Largo" },
-  { name: "Hillsborough County", cities: "Tampa, Brandon, Riverview" },
-  { name: "Sarasota County", cities: "Sarasota, Venice, North Port" },
-];
+import Link from "next/link";
+import { MapPin, ArrowRight } from "lucide-react";
+import { COUNTIES } from "@/lib/counties";
 
 export default function Fleet() {
   return (
@@ -33,16 +28,23 @@ export default function Fleet() {
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            {counties.map((county) => (
-              <div key={county.name} className="glass-card rounded-xl p-4 flex gap-3">
+            {COUNTIES.map((county) => (
+              <Link
+                key={county.slug}
+                href={`/service-area/${county.slug}`}
+                className="glass-card rounded-xl p-4 flex gap-3 transition-transform hover:-translate-y-1"
+              >
                 <MapPin size={18} className="ice-text shrink-0 mt-0.5" />
-                <div>
-                  <div className="text-sm font-semibold text-white">{county.name}</div>
+                <div className="flex-1">
+                  <div className="text-sm font-semibold text-white flex items-center gap-1.5">
+                    {county.name}
+                    <ArrowRight size={13} className="ice-text" />
+                  </div>
                   <div className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
-                    {county.cities}
+                    {county.cities.join(", ")}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

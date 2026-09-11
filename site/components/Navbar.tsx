@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
+import { COUNTIES } from "@/lib/counties";
 
-const anchorLinks = [
-  { label: "Services", hash: "#services" },
-  { label: "Commercial Work", hash: "#commercial" },
+const beforeServiceArea = [{ label: "Services", hash: "#services" }, { label: "Commercial Work", hash: "#commercial" }];
+const afterServiceArea = [
   { label: "Reviews", hash: "#reviews" },
   { label: "Financing", hash: "#financing" },
   { label: "FAQ", hash: "#faq" },
@@ -19,18 +19,30 @@ const anchorLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [serviceAreaOpen, setServiceAreaOpen] = useState(false);
+  const [mobileServiceAreaOpen, setMobileServiceAreaOpen] = useState(false);
+  const serviceAreaRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const onHomepage = pathname === "/";
-  const links = anchorLinks.map((l) => ({
-    label: l.label,
-    href: onHomepage ? l.hash : `/${l.hash}`,
-  }));
+
+  const toHref = (hash: string) => (onHomepage ? hash : `/${hash}`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!serviceAreaOpen) return;
+    const onClickOutside = (e: MouseEvent) => {
+      if (serviceAreaRef.current && !serviceAreaRef.current.contains(e.target as Node)) {
+        setServiceAreaOpen(false);
+      }
+    };
+    document.addEventListener("click", onClickOutside);
+    return () => document.removeEventListener("click", onClickOutside);
+  }, [serviceAreaOpen]);
 
   return (
     <nav
@@ -56,10 +68,58 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden lg:flex items-center gap-8">
-          {links.map((l) => (
+          {beforeServiceArea.map((l) => (
             <a
-              key={l.href}
-              href={l.href}
+              key={l.hash}
+              href={toHref(l.hash)}
+              className="text-sm font-medium transition-colors"
+              style={{ color: "var(--text-secondary)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            >
+              {l.label}
+            </a>
+          ))}
+
+          <div className="relative" ref={serviceAreaRef}>
+            <button
+              onClick={() => setServiceAreaOpen((v) => !v)}
+              className="flex items-center gap-1 text-sm font-medium transition-colors"
+              style={{ color: "var(--text-secondary)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+              aria-expanded={serviceAreaOpen}
+            >
+              Service Area
+              <ChevronDown
+                size={14}
+                style={{ transform: serviceAreaOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
+              />
+            </button>
+            {serviceAreaOpen && (
+              <div
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 rounded-xl p-2 glass-card"
+                style={{ background: "rgba(6,14,46,0.98)" }}
+              >
+                {COUNTIES.map((county) => (
+                  <Link
+                    key={county.slug}
+                    href={`/service-area/${county.slug}`}
+                    onClick={() => setServiceAreaOpen(false)}
+                    className="block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors hover:text-white"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    {county.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {afterServiceArea.map((l) => (
+            <a
+              key={l.hash}
+              href={toHref(l.hash)}
               className="text-sm font-medium transition-colors"
               style={{ color: "var(--text-secondary)" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
@@ -97,10 +157,53 @@ export default function Navbar() {
           className="lg:hidden px-6 pb-6 pt-2"
           style={{ background: "rgba(6,14,46,0.98)", borderTop: "1px solid var(--border)" }}
         >
-          {links.map((l) => (
+          {beforeServiceArea.map((l) => (
             <a
-              key={l.href}
-              href={l.href}
+              key={l.hash}
+              href={toHref(l.hash)}
+              onClick={() => setMenuOpen(false)}
+              className="block py-3 text-base font-medium"
+              style={{ color: "var(--text-secondary)", borderBottom: "1px solid var(--border-subtle)" }}
+            >
+              {l.label}
+            </a>
+          ))}
+
+          <button
+            onClick={() => setMobileServiceAreaOpen((v) => !v)}
+            className="w-full flex items-center justify-between py-3 text-base font-medium"
+            style={{ color: "var(--text-secondary)", borderBottom: "1px solid var(--border-subtle)" }}
+            aria-expanded={mobileServiceAreaOpen}
+          >
+            Service Area
+            <ChevronDown
+              size={18}
+              style={{ transform: mobileServiceAreaOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
+            />
+          </button>
+          {mobileServiceAreaOpen && (
+            <div className="pl-4" style={{ borderBottom: "1px solid var(--border-subtle)" }}>
+              {COUNTIES.map((county) => (
+                <Link
+                  key={county.slug}
+                  href={`/service-area/${county.slug}`}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setMobileServiceAreaOpen(false);
+                  }}
+                  className="block py-2.5 text-sm font-medium"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {county.name}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {afterServiceArea.map((l) => (
+            <a
+              key={l.hash}
+              href={toHref(l.hash)}
               onClick={() => setMenuOpen(false)}
               className="block py-3 text-base font-medium"
               style={{ color: "var(--text-secondary)", borderBottom: "1px solid var(--border-subtle)" }}

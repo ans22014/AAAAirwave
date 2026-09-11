@@ -9,6 +9,9 @@ import CTABand from "@/components/CTABand";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { BUSINESS } from "@/lib/business";
+import { acRepairFaqs, buildFaqSchema } from "@/lib/faq-schema";
+
+const faqSchema = buildFaqSchema(acRepairFaqs);
 
 const title = "AC & Heating Repair in Tampa, FL | AAA Airwaves, Inc.";
 const description =
@@ -70,6 +73,10 @@ export default function AcRepairTampa() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Navbar />
       <main className="flex-1">
         <ServicePageHero
@@ -105,7 +112,7 @@ export default function AcRepairTampa() {
         <WhyChooseUs />
         <Financing />
         <Testimonials />
-        <FAQ />
+        <FAQ heading="AC & Heating Repair" accentWord="FAQs." faqs={acRepairFaqs} />
         <CTABand />
         <Contact />
       </main>

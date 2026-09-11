@@ -10,6 +10,9 @@ import CTABand from "@/components/CTABand";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { BUSINESS } from "@/lib/business";
+import { commercialHvacFaqs, buildFaqSchema } from "@/lib/faq-schema";
+
+const faqSchema = buildFaqSchema(commercialHvacFaqs);
 
 const title = "Commercial HVAC & Rooftop Units | AAA Airwaves, Inc. | Tampa, FL";
 const description =
@@ -71,6 +74,10 @@ export default function CommercialHvac() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Navbar />
       <main className="flex-1">
         <ServicePageHero
@@ -107,7 +114,7 @@ export default function CommercialHvac() {
         <WhyChooseUs />
         <Financing />
         <Testimonials />
-        <FAQ />
+        <FAQ heading="Commercial HVAC" accentWord="FAQs." faqs={commercialHvacFaqs} />
         <CTABand />
         <Contact />
       </main>

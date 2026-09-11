@@ -11,7 +11,9 @@ import FAQ from "@/components/FAQ";
 import CTABand from "@/components/CTABand";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import { faqSchema } from "@/lib/faq-schema";
+import { homeFaqs, buildFaqSchema } from "@/lib/faq-schema";
+
+const faqSchema = buildFaqSchema(homeFaqs);
 
 export default function Home() {
   return (
@@ -30,7 +32,7 @@ export default function Home() {
         <CommercialWork />
         <Fleet />
         <Testimonials />
-        <FAQ />
+        <FAQ heading="Questions" accentWord="Tampa Homeowners Ask." faqs={homeFaqs} />
         <CTABand />
         <Contact />
       </main>

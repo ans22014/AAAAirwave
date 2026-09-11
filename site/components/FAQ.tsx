@@ -2,9 +2,16 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { faqs } from "@/lib/faq-schema";
 
-export default function FAQ() {
+export default function FAQ({
+  heading,
+  accentWord,
+  faqs,
+}: {
+  heading: string;
+  accentWord: string;
+  faqs: readonly { question: string; answer: string }[];
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -13,7 +20,7 @@ export default function FAQ() {
         <div className="max-w-2xl mb-14">
           <span className="section-label">FAQ</span>
           <h2 className="font-[family-name:var(--font-oswald)] font-bold text-white text-4xl lg:text-5xl mt-3">
-            Questions <span className="duo-text">Tampa Homeowners Ask.</span>
+            {heading} <span className="duo-text">{accentWord}</span>
           </h2>
         </div>
 
