@@ -1,4 +1,5 @@
-import { Home, Building2, Snowflake, Flame, Wrench, AlarmClock } from "lucide-react";
+import Link from "next/link";
+import { Home, Building2, Snowflake, Flame, Wrench, AlarmClock, ArrowRight } from "lucide-react";
 
 const residential = [
   { icon: Snowflake, title: "AC Repair & Installation", desc: "Fast diagnostics and repair for every make and model, plus full system installs." },
@@ -28,8 +29,20 @@ export default function Services() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
-          <ServiceGroup label="Residential" items={residential} accent="ice" />
-          <ServiceGroup label="Commercial" items={commercial} accent="ember" />
+          <ServiceGroup
+            label="Residential"
+            items={residential}
+            accent="ice"
+            href="/ac-repair-tampa"
+            linkLabel="View residential AC & heating services"
+          />
+          <ServiceGroup
+            label="Commercial"
+            items={commercial}
+            accent="ember"
+            href="/commercial-hvac"
+            linkLabel="View commercial HVAC services"
+          />
         </div>
       </div>
     </section>
@@ -40,10 +53,14 @@ function ServiceGroup({
   label,
   items,
   accent,
+  href,
+  linkLabel,
 }: {
   label: string;
   items: { icon: React.ElementType; title: string; desc: string }[];
   accent: "ice" | "ember";
+  href: string;
+  linkLabel: string;
 }) {
   const accentColor = accent === "ice" ? "var(--ice)" : "var(--ember)";
   return (
@@ -73,6 +90,14 @@ function ServiceGroup({
           </div>
         ))}
       </div>
+      <Link
+        href={href}
+        className="inline-flex items-center gap-2 text-sm font-semibold mt-5 transition-colors"
+        style={{ color: accentColor }}
+      >
+        {linkLabel}
+        <ArrowRight size={16} />
+      </Link>
     </div>
   );
 }

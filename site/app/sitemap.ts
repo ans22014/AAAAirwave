@@ -9,5 +9,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: "https://aaa-airwaves.com/ac-repair-tampa",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://aaa-airwaves.com/commercial-hvac",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 }

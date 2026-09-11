@@ -2,21 +2,29 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, Menu, X } from "lucide-react";
 import { BUSINESS } from "@/lib/business";
 
-const links = [
-  { label: "Services", href: "#services" },
-  { label: "Commercial Work", href: "#commercial" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Financing", href: "#financing" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+const anchorLinks = [
+  { label: "Services", hash: "#services" },
+  { label: "Commercial Work", hash: "#commercial" },
+  { label: "Reviews", hash: "#reviews" },
+  { label: "Financing", hash: "#financing" },
+  { label: "FAQ", hash: "#faq" },
+  { label: "Contact", hash: "#contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const onHomepage = pathname === "/";
+  const links = anchorLinks.map((l) => ({
+    label: l.label,
+    href: onHomepage ? l.hash : `/${l.hash}`,
+  }));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -34,7 +42,7 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-[1240px] mx-auto px-6 h-[76px] flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3 shrink-0">
+        <Link href="/" className="flex items-center gap-3 shrink-0">
           <Image
             src="/images/logo.png"
             alt="AAA Airwaves logo"
@@ -45,7 +53,7 @@ export default function Navbar() {
           <span className="font-[family-name:var(--font-oswald)] font-bold text-lg text-white tracking-tight hidden sm:inline">
             AAA AIRWAVES
           </span>
-        </a>
+        </Link>
 
         <div className="hidden lg:flex items-center gap-8">
           {links.map((l) => (

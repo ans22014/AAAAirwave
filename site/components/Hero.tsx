@@ -17,8 +17,13 @@ export default function Hero() {
   useEffect(() => {
     const current = videoRefs.current[active];
     if (!current) return;
+    if (current.readyState === 0) {
+      current.load();
+    }
     current.currentTime = 0;
-    current.play().catch(() => {});
+    current.play().catch((err) => {
+      console.warn(`Hero video failed to play: ${clips[active].src}`, err);
+    });
   }, [active]);
 
   const handleEnded = () => {
@@ -38,10 +43,9 @@ export default function Hero() {
           }}
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
           style={{ opacity: i === active ? 1 : 0 }}
-          autoPlay={i === active}
           muted
           playsInline
-          preload={i === active ? "auto" : "none"}
+          preload="auto"
           poster={clip.poster}
           onEnded={handleEnded}
           data-hero-video

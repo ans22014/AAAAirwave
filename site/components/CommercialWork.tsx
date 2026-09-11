@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-export default function CommercialWork() {
+export default function CommercialWork({ showPageLink = true }: { showPageLink?: boolean }) {
   return (
     <section id="commercial" className="py-24 lg:py-32" style={{ background: "var(--navy-deep)" }}>
       <div className="max-w-[1240px] mx-auto px-6">
@@ -13,6 +15,15 @@ export default function CommercialWork() {
             From crane-lift rooftop unit swaps to multi-ton commercial systems, our crew has the
             equipment and experience to get it done safely and on schedule.
           </p>
+          {showPageLink && (
+            <Link
+              href="/commercial-hvac"
+              className="inline-flex items-center gap-2 text-sm font-semibold mt-5 ember-text"
+            >
+              View commercial HVAC services
+              <ArrowRight size={16} />
+            </Link>
+          )}
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
